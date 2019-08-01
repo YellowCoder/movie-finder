@@ -1,8 +1,7 @@
 CREATE TABLE categories (
-  id BIGSERIAL PRIMARY KEY,
-  created_at TIMESTAMP NOT NULL,
+  id INTEGER PRIMARY KEY,
   name CHARACTER VARYING NOT NULL,
   slug CHARACTER VARYING NOT NULL
 );
 
-CREATE INDEX index_slug ON categories(slug);
+CREATE INDEX index_slug_on_categories ON categories(slug);

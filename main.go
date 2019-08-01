@@ -3,8 +3,6 @@ package main
 import (
 	"fmt"
 
-	_ "github.com/lib/pq"
-
 	"github.com/YellowCoder/movie-finder/config"
 	"github.com/YellowCoder/movie-finder/model"
 )

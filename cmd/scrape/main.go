@@ -1,33 +1,12 @@
 package main
 
 import (
-	"fmt"
-
-	"github.com/PuerkitoBio/goquery"
-	"github.com/YellowCoder/movie-finder/config"
+	"github.com/YellowCoder/movie-finder/movie_scraper"
 )
 
 func main() {
-	url := "https://www.imdb.com/chart/top?ref_=nv_mv_250"
+	url := "https://www.imdb.com/title/tt0111161/?pf_rd_m=A2FGELUUNOQJNL&pf_rd_p=e31d89dd-322d-4646-8962-327b42fe94b1&pf_rd_r=DJVPQSBSMW27TEWNS65C&pf_rd_s=center-1&pf_rd_t=15506&pf_rd_i=top&ref_=chttp_tt_1"
 
-	doc, err := goquery.NewDocument(url)
-
-	if err != nil {
-		fmt.Println("Something went wrong:", err)
-		return
-	}
-
-	doc.Find(".lister table tbody tr").Each(func(i int, s *goquery.Selection) {
-		title, _ := s.Find(".titleColumn a").Attr("title")
-		url, _ := s.Find(".titleColumn a").Attr("href")
-
-		sqlStatement := `INSERT INTO movies (name, url) VALUES ($1, $2)`
-
-		_, err = config.DatabaseConnection.Exec(sqlStatement, title, url)
-
-		if err != nil {
-			fmt.Println("Inserting error:", err)
-		}
-	})
-
+	scraper := movie_scraper.CreateMovieScraper(url)
+	scraper.Execute()
 }

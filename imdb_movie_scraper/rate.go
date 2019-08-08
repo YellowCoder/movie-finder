@@ -1,12 +1,15 @@
 package imdb_movie_scraper
 
 import (
+	"strconv"
+
 	"github.com/PuerkitoBio/goquery"
+	"github.com/YellowCoder/movie-finder/model"
 )
 
 type RateScraper struct {
 	query string
-	value string
+	value float64
 }
 
 func CreateRateScraper() *RateScraper {
@@ -14,16 +17,13 @@ func CreateRateScraper() *RateScraper {
 }
 
 func (n *RateScraper) FindValue(doc *goquery.Document) error {
-	n.value = doc.Find(n.query).Text()
+	rate, _ := strconv.ParseFloat(doc.Find(n.query).Text(), 32)
+	n.value = rate
+
 	return nil
 }
 
-func (n *RateScraper) GetValue() map[string]interface{} {
-	return map[string]interface{}{
-		"rate": n.value,
-	}
-}
-
-func (t *RateScraper) PersistValue(movieURL string) error {
+func (n *RateScraper) PersistValue(movie *model.Movie) error {
+	movie.Rate = n.value
 	return nil
 }

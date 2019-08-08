@@ -1,9 +1,8 @@
 package imdb_movie_scraper
 
 import (
-	"fmt"
-
 	"github.com/PuerkitoBio/goquery"
+	"github.com/YellowCoder/movie-finder/model"
 )
 
 type TitleScraper struct {
@@ -20,13 +19,7 @@ func (t *TitleScraper) FindValue(doc *goquery.Document) error {
 	return nil
 }
 
-func (t *TitleScraper) GetValue() map[string]interface{} {
-	return map[string]interface{}{
-		"title": t.value,
-	}
-}
-
-func (t *TitleScraper) PersistValue(movieURL string) error {
-	fmt.Println(movieURL)
+func (t *TitleScraper) PersistValue(movie *model.Movie) error {
+	movie.Title = t.value
 	return nil
 }

@@ -1,10 +1,10 @@
 CREATE TABLE movies (
-  id INTEGER PRIMARY KEY,
+  id SERIAL PRIMARY KEY,
   category_id INTEGER REFERENCES categories(id),
-  name CHARACTER VARYING NOT NULL,
-  slug CHARACTER VARYING NOT NULL,
-  url CHARACTER VARYING NOT NULL,
-  rate FLOAT NOT NULL
+  name CHARACTER VARYING,
+  slug CHARACTER VARYING,
+  url CHARACTER VARYING,
+  rate FLOAT
 );
 
 CREATE INDEX index_category_id_on_movies ON movies(category_id);

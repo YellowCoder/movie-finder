@@ -3,7 +3,7 @@ package model
 type Movie struct {
 	Title      string
 	Slug       string
-	CategoryID uint16
+	Categories []string
 	Url        string
 	Rate       float64
 }

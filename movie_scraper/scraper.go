@@ -1,6 +1,8 @@
 package movie_scraper
 
 import (
+	"fmt"
+
 	"github.com/PuerkitoBio/goquery"
 	"github.com/YellowCoder/movie-finder/imdb_movie_scraper"
 	"github.com/YellowCoder/movie-finder/model"
@@ -23,12 +25,15 @@ func CreateMovieScraper(movieURL string) ScrapedMovie {
 		elements: []MovieElement{
 			imdb_movie_scraper.CreateTitleScraper(),
 			imdb_movie_scraper.CreateRateScraper(),
+			imdb_movie_scraper.CreateCategoryScraper(),
 		},
 	}
 }
 
 func (m *ScrapedMovie) Execute() (err error) {
 	m.findElements()
+
+	fmt.Println("End of scrape", m.movie)
 
 	return nil
 }

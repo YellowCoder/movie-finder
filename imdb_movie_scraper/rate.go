@@ -9,21 +9,15 @@ import (
 
 type RateScraper struct {
 	query string
-	value float64
 }
 
 func CreateRateScraper() *RateScraper {
 	return &RateScraper{query: ".ratingValue strong span"}
 }
 
-func (n *RateScraper) FindValue(doc *goquery.Document) error {
+func (n *RateScraper) FindValue(doc *goquery.Document, movie *model.Movie) error {
 	rate, _ := strconv.ParseFloat(doc.Find(n.query).Text(), 32)
-	n.value = rate
+	movie.Rate = rate
 
-	return nil
-}
-
-func (n *RateScraper) PersistValue(movie *model.Movie) error {
-	movie.Rate = n.value
 	return nil
 }

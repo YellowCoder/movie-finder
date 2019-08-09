@@ -7,19 +7,13 @@ import (
 
 type TitleScraper struct {
 	query string
-	value string
 }
 
 func CreateTitleScraper() *TitleScraper {
 	return &TitleScraper{query: ".title_wrapper h1"}
 }
 
-func (t *TitleScraper) FindValue(doc *goquery.Document) error {
-	t.value = doc.Find(t.query).Text()
-	return nil
-}
-
-func (t *TitleScraper) PersistValue(movie *model.Movie) error {
-	movie.Title = t.value
+func (t *TitleScraper) FindValue(doc *goquery.Document, movie *model.Movie) error {
+	movie.Title = doc.Find(t.query).Text()
 	return nil
 }

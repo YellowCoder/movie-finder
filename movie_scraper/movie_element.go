@@ -6,6 +6,5 @@ import (
 )
 
 type MovieElement interface {
-	FindValue(doc *goquery.Document) error
-	PersistValue(movie *model.Movie) error
+	FindValue(doc *goquery.Document, movie *model.Movie) error
 }

@@ -29,21 +29,13 @@ func CreateMovieScraper(movieURL string) ScrapedMovie {
 
 func (m *ScrapedMovie) Execute() (err error) {
 	m.findElements()
-	m.updateMovie()
 
 	return nil
 }
 
 func (m *ScrapedMovie) findElements() error {
 	for _, element := range m.elements {
-		element.FindValue(m.doc)
-	}
-	return nil
-}
-
-func (m *ScrapedMovie) updateMovie() error {
-	for _, element := range m.elements {
-		element.PersistValue(m.movie)
+		element.FindValue(m.doc, m.movie)
 	}
 	return nil
 }

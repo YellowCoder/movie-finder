@@ -1,9 +1,9 @@
 package model
 
 type Movie struct {
-	Title      string
-	Slug       string
 	Categories []string
-	Url        string
+	Duration   string
 	Rate       float64
+	Title      string
+	Url        string
 }

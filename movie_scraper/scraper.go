@@ -26,6 +26,7 @@ func CreateMovieScraper(movieURL string) ScrapedMovie {
 			imdb_movie_scraper.CreateTitleScraper(),
 			imdb_movie_scraper.CreateRateScraper(),
 			imdb_movie_scraper.CreateCategoryScraper(),
+			imdb_movie_scraper.CreateDurationScraper(),
 		},
 	}
 }

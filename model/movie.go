@@ -1,6 +1,7 @@
 package model
 
 type Movie struct {
+	TableID     string
 	Categories  []string
 	Duration    string
 	Rate        float64

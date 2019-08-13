@@ -1,27 +1,24 @@
 package movie_scraper
 
 import (
-	"fmt"
-
 	"github.com/PuerkitoBio/goquery"
 	"github.com/YellowCoder/movie-finder/imdb_movie_scraper"
 	"github.com/YellowCoder/movie-finder/model"
 )
 
-type ScrapedMovie struct {
+type movieDetails struct {
 	url      string
 	doc      *goquery.Document
 	movie    *model.Movie
 	elements []MovieElement
 }
 
-func CreateMovieScraper(movieURL string) ScrapedMovie {
-	doc, _ := goquery.NewDocument(movieURL)
+func CreateDetails(movie *model.Movie) *movieDetails {
+	doc, _ := goquery.NewDocument(movie.Url)
 
-	return ScrapedMovie{
-		url:   movieURL,
+	return &movieDetails{
 		doc:   doc,
-		movie: &model.Movie{Url: movieURL},
+		movie: movie,
 		elements: []MovieElement{
 			imdb_movie_scraper.CreateTitleScraper(),
 			imdb_movie_scraper.CreateRateScraper(),
@@ -31,15 +28,12 @@ func CreateMovieScraper(movieURL string) ScrapedMovie {
 	}
 }
 
-func (m *ScrapedMovie) Execute() (err error) {
+func (m *movieDetails) Execute() (err error) {
 	m.findElements()
-
-	fmt.Println("End of scrape", m.movie)
-
 	return nil
 }
 
-func (m *ScrapedMovie) findElements() error {
+func (m *movieDetails) findElements() error {
 	for _, element := range m.elements {
 		element.FindValue(m.doc, m.movie)
 	}

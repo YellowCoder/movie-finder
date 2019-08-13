@@ -7,6 +7,6 @@ import (
 func main() {
 	url := "https://www.imdb.com/title/tt5886046/"
 
-	scraper := movie_scraper.CreateMovieScraper(url)
+	scraper := movie_scraper.CreateApplication(url)
 	scraper.Execute()
 }

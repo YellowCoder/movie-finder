@@ -1,6 +1,6 @@
-package movie_scraper
+package imdb_scraper
 
-import "github.com/YellowCoder/movie-finder/model"
+import "github.com/YellowCoder/movie-finder/scrape_model"
 
 type scraper struct {
 	movieDetails *movieDetails
@@ -8,7 +8,7 @@ type scraper struct {
 }
 
 func CreateApplication(url string) *scraper {
-	movie := &model.Movie{Url: url, TableID: "movies"}
+	movie := &scrape_model.Movie{Url: url}
 
 	movieDetails := CreateDetails(movie)
 	movieSaver := CreateSaver(movie)

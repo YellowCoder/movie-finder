@@ -1,10 +1,10 @@
-package imdb_movie_scraper
+package imdb_elements
 
 import (
 	"regexp"
 
 	"github.com/PuerkitoBio/goquery"
-	"github.com/YellowCoder/movie-finder/model"
+	"github.com/YellowCoder/movie-finder/scrape_model"
 )
 
 type CategoryScraper struct {
@@ -17,7 +17,7 @@ func CreateCategoryScraper() *CategoryScraper {
 	return &CategoryScraper{query: ".title_wrapper .subtext a"}
 }
 
-func (c *CategoryScraper) FindValue(doc *goquery.Document, movie *model.Movie) error {
+func (c *CategoryScraper) FindValue(doc *goquery.Document, movie *scrape_model.Movie) error {
 	categories := []string{}
 
 	doc.Find(c.query).Each(func(index int, item *goquery.Selection) {

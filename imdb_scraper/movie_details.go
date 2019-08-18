@@ -1,29 +1,30 @@
-package movie_scraper
+package imdb_scraper
 
 import (
 	"github.com/PuerkitoBio/goquery"
-	"github.com/YellowCoder/movie-finder/imdb_movie_scraper"
-	"github.com/YellowCoder/movie-finder/model"
+	"github.com/YellowCoder/movie-finder/scrape_model"
+	"github.com/YellowCoder/movie-finder/imdb_scraper/imdb_elements"
+	"fmt"
 )
 
 type movieDetails struct {
 	url      string
 	doc      *goquery.Document
-	movie    *model.Movie
+	movie    *scrape_model.Movie
 	elements []MovieElement
 }
 
-func CreateDetails(movie *model.Movie) *movieDetails {
+func CreateDetails(movie *scrape_model.Movie) *movieDetails {
 	doc, _ := goquery.NewDocument(movie.Url)
 
 	return &movieDetails{
 		doc:   doc,
 		movie: movie,
 		elements: []MovieElement{
-			imdb_movie_scraper.CreateTitleScraper(),
-			imdb_movie_scraper.CreateRateScraper(),
-			imdb_movie_scraper.CreateCategoryScraper(),
-			imdb_movie_scraper.CreateDurationScraper(),
+			imdb_elements.CreateTitleScraper(),
+			imdb_elements.CreateRateScraper(),
+			imdb_elements.CreateCategoryScraper(),
+			imdb_elements.CreateDurationScraper(),
 		},
 	}
 }

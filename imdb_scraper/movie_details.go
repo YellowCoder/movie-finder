@@ -2,9 +2,8 @@ package imdb_scraper
 
 import (
 	"github.com/PuerkitoBio/goquery"
-	"github.com/YellowCoder/movie-finder/scrape_model"
 	"github.com/YellowCoder/movie-finder/imdb_scraper/imdb_elements"
-	"fmt"
+	"github.com/YellowCoder/movie-finder/scrape_model"
 )
 
 type movieDetails struct {

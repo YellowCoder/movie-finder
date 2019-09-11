@@ -1,26 +1,21 @@
 package config
 
 import (
-	"database/sql"
 	"fmt"
 
+	"github.com/jinzhu/gorm"
 	_ "github.com/lib/pq"
 
 	"github.com/YellowCoder/movie-finder/env"
 )
 
-type databaseConnection struct {
-	*sql.DB
-}
+var DatabaseConnection *gorm.DB
 
-var DatabaseConnection *databaseConnection
-
-func openDatabaseConnection() {
-	db, err := sql.Open("postgres", env.Database.URL)
+func configureDatabase() {
+	var err error
+	DatabaseConnection, err = gorm.Open("postgres", env.Database.URL)
 
 	if err != nil {
 		fmt.Println("Error", err)
 	}
-
-	DatabaseConnection = &databaseConnection{db}
 }

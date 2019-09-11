@@ -1,5 +1,6 @@
 package database_model
 
 type Movie struct {
-	ID int
+	ID   uint `gorm:"primary_key"`
+	Name string
 }

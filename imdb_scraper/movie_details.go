@@ -37,5 +37,6 @@ func (m *movieDetails) findElements() error {
 	for _, element := range m.elements {
 		element.FindValue(m.doc, m.movie)
 	}
+	// fmt.Println(m.movie)
 	return nil
 }

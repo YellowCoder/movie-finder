@@ -1,7 +1,5 @@
 package repository
 
-var Movie *movieRepository
+import "github.com/YellowCoder/movie-finder/config"
 
-func init() {
-	Movie = CreateMovieRepository()
-}
+var MovieRepository = &movieRepository{config.DatabaseConnection}

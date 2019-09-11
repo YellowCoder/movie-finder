@@ -16,7 +16,7 @@ func CreateSaver(movie *scrape_model.Movie) *movieSaver {
 }
 
 func (m *movieSaver) Execute() error {
-	repository.Movie.Create(m.movie)
+	repository.MovieRepository.Create(m.movie)
 	return nil
 }
 

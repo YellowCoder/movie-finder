@@ -1,25 +1,26 @@
 package repository
 
 import (
-	"github.com/YellowCoder/movie-finder/config"
-	"github.com/YellowCoder/movie-finder/database_model"
 	"github.com/YellowCoder/movie-finder/scrape_model"
 	"github.com/jinzhu/gorm"
 )
+
+type Movie struct {
+	ID   uint `gorm:"primary_key"`
+	Name string
+	Url  string
+	Rate float64
+}
 
 type movieRepository struct {
 	db *gorm.DB
 }
 
-type movieRepositoryResult struct {
-	Movie *database_model.Movie
-	Error error
-}
+func (m *movieRepository) Create(scraped_movie *scrape_model.Movie) {
+	movie := &Movie{}
+	movie.Name = scraped_movie.Title
+	movie.Url = scraped_movie.Url
+	movie.Rate = scraped_movie.Rate
 
-func CreateMovieRepository() *movieRepository {
-	return &movieRepository{config.DatabaseConnection}
-}
-
-func (m *movieRepository) Create(movie *scrape_model.Movie) {
-	m.db.Create(&database_model.Movie{Name: movie.Title})
+	m.db.Create(movie)
 }

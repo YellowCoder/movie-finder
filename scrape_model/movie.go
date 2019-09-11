@@ -1,8 +1,6 @@
 package scrape_model
 
 type Movie struct {
-	ID          int
-	TableID     string
 	Categories  []string
 	Duration    string
 	Rate        float64

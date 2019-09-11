@@ -1,6 +1,8 @@
 package imdb_scraper
 
 import (
+	"fmt"
+
 	"github.com/YellowCoder/movie-finder/repository"
 	"github.com/YellowCoder/movie-finder/scrape_model"
 )
@@ -15,9 +17,12 @@ func CreateSaver(movie *scrape_model.Movie) *movieSaver {
 	}
 }
 
-func (m *movieSaver) Execute() error {
-	repository.MovieRepository.Create(m.movie)
-	return nil
+func (m *movieSaver) Execute() {
+	_, err := repository.MovieRepository.FindOrCreate(m.movie)
+
+	if err != nil {
+		fmt.Println(err)
+	}
 }
 
 func (m *movieSaver) findMovie() error {

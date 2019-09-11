@@ -1,7 +1,7 @@
 CREATE TABLE movies (
   id SERIAL PRIMARY KEY,
   title CHARACTER VARYING,
-  release_date DATE,
+  release_date CHARACTER VARYING,
   duration CHARACTER VARYING,
   rate FLOAT,
   url CHARACTER VARYING

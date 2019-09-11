@@ -23,8 +23,7 @@ func (c *ReleaseDate) FindValue(doc *goquery.Document, movie *scrape_model.Movie
 		href, _ := item.Attr("href")
 
 		if validReleaseDate.MatchString(href) {
-			// name := item.Text()
-			// fmt.Println(name)
+			movie.ReleaseDate = item.Text()
 		}
 	})
 

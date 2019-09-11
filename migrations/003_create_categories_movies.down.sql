@@ -1,1 +1,1 @@
-DROP TABLE categories_movis;
+DROP TABLE categories_movies;

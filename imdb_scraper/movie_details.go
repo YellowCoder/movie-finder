@@ -24,6 +24,7 @@ func CreateDetails(movie *scrape_model.Movie) *movieDetails {
 			imdb_elements.CreateRateScraper(),
 			imdb_elements.CreateCategoryScraper(),
 			imdb_elements.CreateDurationScraper(),
+			imdb_elements.CreateReleaseDate(),
 		},
 	}
 }
@@ -37,6 +38,5 @@ func (m *movieDetails) findElements() error {
 	for _, element := range m.elements {
 		element.FindValue(m.doc, m.movie)
 	}
-	// fmt.Println(m.movie)
 	return nil
 }

@@ -22,14 +22,21 @@ func CreateDetails(pageUrl string, query string) *pageDetails {
 func (p *pageDetails) Execute() {
 	doc, _ := goquery.NewDocument(p.url)
 
+	maxGoroutines := 10
+	guard := make(chan struct{}, maxGoroutines)
+
 	doc.Find(p.query).Each(func(index int, item *goquery.Selection) {
 		href, _ := item.Attr("href")
 		href = strings.TrimSpace(href)
 
 		fullMovieUrl := fmt.Sprintf("%s%s", HOST, href)
 
-		scraper := imdb_movie_scraper.CreateApplication(fullMovieUrl)
-		scraper.Execute()
-		fmt.Println("Scraping:", fullMovieUrl)
+		guard <- struct{}{}
+		go func() {
+			scraper := imdb_movie_scraper.CreateApplication(fullMovieUrl)
+			scraper.Execute()
+			<-guard
+		}()
+
 	})
 }

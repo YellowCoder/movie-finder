@@ -5,7 +5,7 @@ type scraper struct {
 }
 
 func CreateApplication(pageUrl string) *scraper {
-	pageDetails := CreateDetails(pageUrl, ".lister-list td a")
+	pageDetails := CreateDetails(pageUrl, ".lister-list .titleColumn a")
 
 	return &scraper{
 		pageDetails: pageDetails,

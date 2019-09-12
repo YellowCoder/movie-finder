@@ -7,7 +7,6 @@ import (
 )
 
 type movieDetails struct {
-	url      string
 	doc      *goquery.Document
 	movie    *scrape_model.Movie
 	elements []MovieElement

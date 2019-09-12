@@ -1,8 +1,8 @@
-package imdb_scraper
+package imdb_movie_scraper
 
 import (
 	"github.com/PuerkitoBio/goquery"
-	"github.com/YellowCoder/movie-finder/imdb_scraper/imdb_elements"
+	"github.com/YellowCoder/movie-finder/imdb_movie_scraper/imdb_elements"
 	"github.com/YellowCoder/movie-finder/scrape_model"
 )
 
@@ -30,11 +30,6 @@ func CreateDetails(movie *scrape_model.Movie) *movieDetails {
 }
 
 func (m *movieDetails) Execute() (err error) {
-	m.findElements()
-	return nil
-}
-
-func (m *movieDetails) findElements() error {
 	for _, element := range m.elements {
 		element.FindValue(m.doc, m.movie)
 	}

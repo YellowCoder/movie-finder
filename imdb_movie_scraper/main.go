@@ -1,4 +1,4 @@
-package imdb_scraper
+package imdb_movie_scraper
 
 import "github.com/YellowCoder/movie-finder/scrape_model"
 

@@ -1,4 +1,4 @@
-package imdb_scraper
+package imdb_movie_scraper
 
 import (
 	"fmt"

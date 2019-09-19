@@ -1,7 +1,6 @@
 package imdb_page_scraper
 
 import (
-	"fmt"
 	"strings"
 
 	"github.com/PuerkitoBio/goquery"
@@ -13,7 +12,7 @@ type pageDetails struct {
 	query string
 }
 
-const HOST = "https://imdb.com"
+const MAX_GO_ROUTINES = 20
 
 func CreateDetails(pageUrl string, query string) *pageDetails {
 	return &pageDetails{url: pageUrl, query: query}
@@ -22,20 +21,17 @@ func CreateDetails(pageUrl string, query string) *pageDetails {
 func (p *pageDetails) Execute() {
 	doc, _ := goquery.NewDocument(p.url)
 
-	maxGoroutines := 10
-	guard := make(chan struct{}, maxGoroutines)
+	done := make(chan bool, MAX_GO_ROUTINES)
 
 	doc.Find(p.query).Each(func(index int, item *goquery.Selection) {
-		href, _ := item.Attr("href")
-		href = strings.TrimSpace(href)
+		moviePath, _ := item.Attr("href")
+		moviePath = strings.TrimSpace(moviePath)
 
-		fullMovieUrl := fmt.Sprintf("%s%s", HOST, href)
-
-		guard <- struct{}{}
+		done <- true
 		go func() {
-			scraper := imdb_movie_scraper.CreateApplication(fullMovieUrl)
+			scraper := imdb_movie_scraper.CreateApplication(moviePath)
 			scraper.Execute()
-			<-guard
+			<-done
 		}()
 
 	})

@@ -2,9 +2,11 @@ package main
 
 import "github.com/YellowCoder/movie-finder/imdb_page_scraper"
 
-func main() {
-	url := "https://www.imdb.com/chart/top"
+var pagePaths = [2]string{"/chart/top", "/chart/moviemeter"}
 
-	scraper := imdb_page_scraper.CreateApplication(url)
-	scraper.Execute()
+func main() {
+	for _, path := range pagePaths {
+		scraper := imdb_page_scraper.CreateApplication(path)
+		scraper.Execute()
+	}
 }

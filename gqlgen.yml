@@ -12,9 +12,7 @@ model:
   filename: graphql/models.go
   package: graphql
 resolver:
-  filename: resolver.go
+  filename: graphql/resolver.go
   type: Resolver
-models:
-  Movie:
-    model: repository/movie.go
+  package: graphql
 autobind: []

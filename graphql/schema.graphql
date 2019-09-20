@@ -1,9 +1,9 @@
 type Movie {
-  id: ID!
+  id: Int!
   title: String!
 }
 
-type NewMovie {
+input NewMovie {
   title: String!
 }
 

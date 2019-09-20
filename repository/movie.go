@@ -73,3 +73,9 @@ func (r *movieRepository) FirstOrCreate(scraped_movie *scrape_model.Movie) (*Mov
 
 	return movie, nil
 }
+
+func (r *movieRepository) All() []Movie {
+	movies := []Movie{}
+	r.db.Find(&movies)
+	return movies
+}

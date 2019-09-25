@@ -8,7 +8,7 @@ import (
 )
 
 type Movie struct {
-	ID          uint `gorm:"primary_key"`
+	ID          int `gorm:"primary_key"`
 	Title       string
 	Url         string
 	Rate        float64
@@ -72,4 +72,10 @@ func (r *movieRepository) FirstOrCreate(scraped_movie *scrape_model.Movie) (*Mov
 	}
 
 	return movie, nil
+}
+
+func (r *movieRepository) All() []*Movie {
+	movies := []*Movie{}
+	r.db.Find(&movies)
+	return movies
 }

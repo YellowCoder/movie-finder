@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+	</head>
+
+	<body>
+		<table>
+			<thead>
+				<tr>
+					<th>ID</th>
+					<th>Title</th>
+					<th>Rate</th>
+					<th>Release date</th>
+					<th>Duration</th>
+				<tr>
+			</thead>
+			<tbody>
+				{{ range .Movies }}
+					<tr>
+						<td>{{ .ID }}</td>
+						<td>{{ .Title }}</td>
+						<td>{{ .Rate }}</td>
+						<td>{{ .ReleaseDate }}</td>
+						<td>{{ .Duration }}</td>
+					</tr>
+				{{ end }}
+			</tbody>
+		</table>
+	</body>
+</html>

@@ -5,8 +5,7 @@ import (
 	"github.com/YellowCoder/movie-finder/repository"
 )
 
-// var pagePaths = [2]string{"/chart/top", "/chart/moviemeter"}
-var pagePaths = [2]string{}
+var pagePaths = [2]string{"/chart/top", "/chart/moviemeter"}
 
 func main() {
 	for _, path := range pagePaths {

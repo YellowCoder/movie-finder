@@ -8,12 +8,13 @@ import (
 )
 
 type Movie struct {
+	Categories  []*Category `gorm:"many2many:categories_movies;"`
+	Duration    string
 	ID          int `gorm:"primary_key"`
-	Title       string
-	Url         string
 	Rate        float64
 	ReleaseDate string
-	Duration    string
+	Title       string
+	Url         string
 }
 
 type movieRepository struct {
@@ -78,4 +79,12 @@ func (r *movieRepository) All() []*Movie {
 	movies := []*Movie{}
 	r.db.Find(&movies)
 	return movies
+}
+
+func (r *movieRepository) ClearCategories(movie *Movie) {
+	r.db.Model(&movie).Association("Categories").Clear()
+}
+
+func (r *movieRepository) AppendCategory(movie *Movie, category *Category) {
+	r.db.Model(movie).Association("Categories").Append(category)
 }
